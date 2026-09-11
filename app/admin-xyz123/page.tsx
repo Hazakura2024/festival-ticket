@@ -91,7 +91,6 @@ export default function AdminPage() {
     }
   };
 
-  // ★ ここで「対応中」と「完了済み」を振り分けます
   const activeTickets = tickets.filter((t) => t.status !== "done");
   const doneTickets = tickets.filter((t) => t.status === "done");
 
@@ -124,7 +123,7 @@ export default function AdminPage() {
                 {ticket.status === "waiting" && (
                   <button
                     onClick={() => updateStatus(ticket.id, "called")}
-                    className="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md active:bg-blue-700"
+                    className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-6 rounded-xl shadow-md border-b-4 border-blue-800 active:border-b-0 active:translate-y-1 transition-all"
                   >
                     完成（呼出）
                   </button>
@@ -132,9 +131,9 @@ export default function AdminPage() {
                 {ticket.status === "called" && (
                   <button
                     onClick={() => updateStatus(ticket.id, "done")}
-                    className="bg-red-500 text-white font-bold py-3 px-6 rounded-lg shadow-md active:bg-red-600"
+                    className="bg-red-500 hover:bg-red-400 text-white font-bold py-3 px-6 rounded-xl shadow-md border-b-4 border-red-800 active:border-b-0 active:translate-y-1 transition-all"
                   >
-                    完了（受渡済）
+                    受渡済にする
                   </button>
                 )}
               </div>
@@ -148,7 +147,7 @@ export default function AdminPage() {
           )}
         </div>
 
-        {/* 完了済みのリスト（不要なら折りたたむなどのアレンジも可能です） */}
+        {/* 完了済みのリスト */}
         {doneTickets.length > 0 && (
           <div className="space-y-2 opacity-60">
             <h2 className="text-sm font-bold text-gray-500 pb-2">
